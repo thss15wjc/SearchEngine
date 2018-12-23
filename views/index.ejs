@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= title %></title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+		</script>
+		<style>
+			div {margin:auto;text-align:center;}
+			.container{margin-top:150px;width:60%;}
+			.test{display:none;}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1><%= title %></h1>
+			<br><br><br>
+			<div class="post">
+				<div class="input-group">
+					<input type="text" class="form-control" id="content" placeholder="请输入标题" name="content">
+					<span class="input-group-btn">
+					<button id="ok" class="btn btn-default" type="button">Go!</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</body>
+<script>
+	$('#ok').click(function() {
+	if (!$('#content').val()) {
+		alert('请填写内容');
+		return false;
+	}
+	$.post('/query', {
+		content: $('#content').val()
+	}, function (data) {
+		console.log('----addtest', data)
+		if (data.code == 200) {
+		alert('提交成功');
+		url = "/list?content="+data.query;
+        window.location.href = url;
+	} else {
+		alert('提交失败');
+	}
+	})
+	})
+</script>
+</html>
