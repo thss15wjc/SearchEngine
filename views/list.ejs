@@ -7,6 +7,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="/javascripts/ty_paging.js"></script>
 	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</script>
 	<style>
 			div {margin:auto;text-align:center;}
@@ -19,8 +20,49 @@
 			#goToPage {width:50px;}
 			#comeTo {width:100px;}
 			li {list-style-type:none;}
-			#classify {background-color: rgb(210,210,210)}
 			body {background-color: rgb(240,240,240)}
+			.navbar-header {
+				margin:auto;
+				text-align:center;
+				float: none;
+			}
+			#main-nav {
+            margin-left: 1px;
+        }
+
+            #main-nav.nav-tabs.nav-stacked > li > a {
+                padding: 10px 8px;
+                font-size: 12px;
+                font-weight: 600;
+                color: #4A515B;
+                background: rgb(200,200,200);
+                border: none;
+                border-radius: 4px;
+            }
+
+
+                #main-nav.nav-tabs.nav-stacked > li.active > a, #main-nav.nav-tabs.nav-stacked > li > a:hover {
+                    color: rgb(200,200,200);
+                    background: #3C4049;
+                }
+
+            
+        .navbar-static-top {
+            background-color: #212121;
+            margin-bottom: 5px;
+        }
+
+        .navbar-brand {
+            background: url('') no-repeat 10px 8px;
+            display: inline-block;
+            vertical-align: middle;
+            padding-left: 50px;
+            color: rgb(240,240,240);
+        }
+		.navbar-default {
+			background-color: rgb(240,240,240);
+			border: none;
+		}
 	</style>
   </head>
 	<body>
@@ -36,14 +78,23 @@
 			<br><br>
 			<div class="row">
 				<div class="col-lg-2" id="classify">
-					<ul>
-						<h3>分类结果<h3>
-						<br>
+				<div class="navbar-header">
+						<h4>分类结果</h4>
+					</div>
+				<nav class="navbar navbar-default" role="navigation">
+				<br>
+				<div class="container-fluid"> 
+					<div class="collapse navbar-collapse" id="example-navbar-collapse">
+					<ul id="main-nav" class="nav nav-tabs nav-stacked">
 						<% for (var i=0; i<6; i++) {%>
-						<li><h4><%=classify[i]%></h4><br>
+						<% for (var item in classify_result[i]) {%>
+						<li><a href="#"><h4><%=item%><h4></a>
 						</li>
-						<% } %>
+						<% } }%>
 					</ul>
+					</div>
+				</div>
+				</nav>
 				</div>
 				<div class="col-lg-10">
 					<div id="result">
@@ -98,7 +149,7 @@
 
 	// total pages
 	var totalPage = <%=totalPages%>;
-
+	var show = [];
 	// init page
 	var currPage = 1;
 
@@ -205,6 +256,120 @@
 	}
 	init();
 	getList();
+	var obj_lis = document.getElementById("classify").getElementsByTagName("li");
+	console.log(obj_lis.length);
+	if ("<%=type%>" == "classify")
+		obj_lis[<%=num%>].className += 'active';
+	if (obj_lis.length > 0) {
+		obj_lis[0].onclick = function(){
+				console.log(obj_lis[0].innerHTML);
+				$.post('/classify', {
+					num: 0
+				}, function (data) {
+					console.log('----classify', data)
+					if (data.code == 200) {
+						alert('提交成功');
+						url = "/list?content="+data.query;
+						window.location.href = url;
+					}
+				 else {
+					alert('提交失败');
+				}
+				})
+			}
+		}
+	if (obj_lis.length > 1) {
+		obj_lis[1].onclick = function(){
+				console.log(obj_lis[1].innerHTML);
+				$.post('/classify', {
+					num: 1
+				}, function (data) {
+					console.log('----classify', data)
+					if (data.code == 200) {
+						alert('提交成功');
+						url = "/list?content="+data.query;
+						window.location.href = url;
+					}
+				 else {
+					alert('提交失败');
+				}
+				})
+			}
+		}
+	if (obj_lis.length > 2) {
+		obj_lis[2].onclick = function(){
+				console.log(obj_lis[2].innerHTML);
+				$.post('/classify', {
+					num: 2
+				}, function (data) {
+					console.log('----classify', data)
+					if (data.code == 200) {
+						alert('提交成功');
+						url = "/list?content="+data.query;
+						window.location.href = url;
+					}
+				 else {
+					alert('提交失败');
+				}
+				})
+			}
+		}
+	if (obj_lis.length > 3) {
+		obj_lis[3].onclick = function(){
+				console.log(obj_lis[3].innerHTML);
+				$.post('/classify', {
+					num: 3
+				}, function (data) {
+					console.log('----classify', data)
+					if (data.code == 200) {
+						alert('提交成功');
+						url = "/list?content="+data.query;
+						window.location.href = url;
+					}
+				 else {
+					alert('提交失败');
+				}
+				})
+			}
+		}
+	if (obj_lis.length > 4) {
+		obj_lis[4].onclick = function(){
+				console.log(obj_lis[4].innerHTML);
+				$.post('/classify', {
+					num: 4
+				}, function (data) {
+					console.log('----classify', data)
+					if (data.code == 200) {
+						alert('提交成功');
+						url = "/list?content="+data.query;
+						window.location.href = url;
+					}
+				 else {
+					alert('提交失败');
+				}
+				})
+			}
+		}
+	if (obj_lis.length > 5) {
+		obj_lis[5].onclick = function(){
+				console.log(obj_lis[5].innerHTML);
+				$.post('/classify', {
+					num: 5
+				}, function (data) {
+					console.log('----classify', data)
+					if (data.code == 200) {
+						alert('提交成功');
+						url = "/list?content="+data.query;
+						window.location.href = url;
+					}
+				 else {
+					alert('提交失败');
+				}
+				})
+			}
+		}
+			
+
 	$('#ok').click(function() {
 	if (!$('#content').val()) {
 		alert('请填写内容');

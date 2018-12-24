@@ -356,6 +356,9 @@ else:
     cluster_result = temp_list
 
 #print(cluster_result)
+file = open('file.json', 'w', encoding='utf-8')
+json.dump(cluster_result, file, ensure_ascii=False)
+file.close()
 classify_result = []
 for elem in cluster_result:
 	classify_result.append(list(elem.keys())[0])
